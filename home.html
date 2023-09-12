@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="stylesheet" href="./css/home.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="sidebar">
+        <div class="sidebar__logo"><p>Friendly Plan</p></div>
+        <div class="sidebar__item sidebar__active">
+          <img src="./img/home.png" alt="home" />
+          <p>Today</p>
+        </div>
+        <div class="sidebar__item">
+          <img src="./img/graphic-progression.png" alt="graphic progression" />
+          <p>Progress</p>
+        </div>
+        <div class="sidebar__item">
+          <img src="./img/setting.png" alt="setting" />
+          <p>Settings</p>
+        </div>
+      </div>
+      <div class="content">
+        <h1 class="content__hello">Hello word</h1>
+        <div id="today-calendar" class="content__calendar">
+          <div class="calendar__item">
+            <p class="item__day">FR</p>
+            <p class="item__date">21</p>
+          </div>
+          <div class="calendar__item">
+            <p class="item__day">FR</p>
+            <p class="item__date">21</p>
+          </div>
+        </div>
+        <div id="empty" class="empty">
+          <h3>Add your first goal</h3>
+        </div>
+        <div id="goals" class="goals"></div>
+        <button id="add-goal" class="add_goal">
+          <img src="" alt="" />
+          New goal
+        </button>
+      </div>
+    </div>
+    <div id="modal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span id="modal-close" class="modal_close">&times;</span>
+        <form class="modal__input">
+          <!-- <label for="input__color">Color</label>
+          <input
+            class="input__color"
+            name="input__color"
+            type="color"
+            placeholder="color"
+          /> -->
+          <!-- <p for="">Icon</p> -->
+          <!-- <option class="input__icon">
+            <select name="" id="">
+              &#10102;
+            </select>
+            <select name="" id="">
+              &#10103;
+            </select>
+            <select name="" id="">
+              &#10104;
+            </select>
+            <select name="" id="">
+              &#10105;
+            </select>
+          </option> -->
+          <textarea
+            id="input__name"
+            class="input__textarea"
+            rows="4"
+            cols="50"
+            placeholder="Goal name"
+            required
+          ></textarea>
+          <select id="input__repeat">
+            <option value="every day" name="" id="">Repeat every day</option>
+            <option value="every week" name="" id="">Repeat every week</option>
+            <option value="once" name="" id="">Do it once</option>
+          </select>
+          <div id="modal-save" class="modal__save">Save</div>
+        </form>
+      </div>
+    </div>
+    <div id="modal-edit" class="modal_edit">
+      <!-- Modal content -->
+      <div class="modal_edit_content">
+        <span id="modal-edit-close" class="modal_edit_close">&times;</span>
+        <form class="modal_edit__input">
+          <textarea
+            id="modal-edit-input-name"
+            class="input__textarea"
+            rows="4"
+            cols="50"
+            placeholder="Goal name"
+            required
+          ></textarea>
+          <div class="modal_edit__more_info">
+            <p class="modal_edit__more_info__item" id="modal-edit-repeat"></p>
+
+            <div
+              class="modal_edit__more_info__item"
+              id="modal-edit-productivity"
+            ></div>
+            <div
+              class="modal_edit__more_info__item"
+              id="modal-edit-tracted"
+            ></div>
+            <div class="modal_edit__more_info__item" id="modal-longest-streak">
+              Comming soon
+              <p>Longest Streak</p>
+            </div>
+          </div>
+          <div id="modal-edit-save" class="modal_edit__save">Save</div>
+          <div id="modal-edit-delete" class="modal_edit__delete">Delete</div>
+        </form>
+      </div>
+    </div>
+    <script src="./app/home.js"></script>
+  </body>
+</html>
