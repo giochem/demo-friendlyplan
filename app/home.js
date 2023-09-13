@@ -196,12 +196,11 @@ for (let i = 0; i < editGoals.length; i++) {
     const repeat = document.getElementById("modal-edit-repeat");
     name.value = goal.name;
     repeat.innerHTML = goal.repeat;
-    // let currentStreak = 0;
-    // productivity of goal
-    let productivity = 0;
+    // current tracked
+    let currentTracked = 0;
     // tracked
     let tracted = 0;
-    // longest
+    // longest streak
     let longestStreak = 0;
     // DD/MM/YYYY -> MM/DD/YYYY
     const covertDDMMYYYYtoMMDDYYYY = (ddmmyyyy) => {
@@ -225,7 +224,46 @@ for (let i = 0; i < editGoals.length; i++) {
         ) {
           tracted += 1;
         }
-        const tracted = goal.tracted;
+        // check has date in tracted
+        let dates = goal.tracted;
+        if (dates.length >= 1) {
+          // covert to number
+          for (let date_i = 0; date_i < dates.length; date_i++) {
+            dates[date_i] = covertDDMMYYYYtoMMDDYYYY(dates[date_i]).getTime();
+          }
+          // count streak latest
+          let lastCurrentTracked = 1;
+          for (let before_i = dates.length - 2; before_i >= 0; before_i--) {
+            // date1 + 1 day = date2
+            if (dates[before_i] + 24 * 60 * 60 * 1000 == dates[before_i + 1]) {
+              lastCurrentTracked += 1;
+              continue;
+            }
+            // not correct
+            break;
+          }
+          // check is today, yesterday or not current streak
+          const todayTracked = new Date();
+          const yesterdayTracked = new Date(
+            todayTracked.getTime() - 24 * 60 * 60 * 1000
+          ); // 1 day
+          const timeOfToday = new Date(
+            covertDDMMYYYYtoMMDDYYYY(todayTracked.toLocaleDateString("pt-PT"))
+          ).getTime();
+          const timeOfYesterday = new Date(
+            covertDDMMYYYYtoMMDDYYYY(
+              yesterdayTracked.toLocaleDateString("pt-PT")
+            )
+          ).getTime();
+          // display current streaked
+          if (
+            dates[dates.length - 1] == timeOfToday ||
+            dates[dates.length - 1] == timeOfYesterday
+          ) {
+            currentTracked = lastCurrentTracked;
+          }
+        }
+
         // if (tracted.length >= 1) {
         //   let todayStreak = new Date().toLocaleDateString("pt-PT");
         //   let yesterdayStreak = new Date(
@@ -276,6 +314,52 @@ for (let i = 0; i < editGoals.length; i++) {
         ) {
           tracted += 1;
         }
+        // check has date in tracted
+        let datesWeek = goal.tracted;
+        if (datesWeek.length >= 1) {
+          // covert to number
+          for (let date_i = 0; date_i < datesWeek.length; date_i++) {
+            datesWeek[date_i] = covertDDMMYYYYtoMMDDYYYY(
+              datesWeek[date_i]
+            ).getTime();
+          }
+          // count streak latest
+          let lastCurrentTrackedWeek = 1;
+          for (let before_i = datesWeek.length - 2; before_i >= 0; before_i--) {
+            // week1 + 7 day = week2
+            if (
+              datesWeek[before_i] + 7 * 24 * 60 * 60 * 1000 ==
+              datesWeek[before_i + 1]
+            ) {
+              lastCurrentTrackedWeek += 1;
+              continue;
+            }
+            // not correct
+            break;
+          }
+          // check is today, yesterday or not current streak
+          const todayTrackedWeek = new Date();
+          const yesterdayTrackedWeek = new Date(
+            todayTrackedWeek.getTime() - 7 * 24 * 60 * 60 * 1000
+          ); // 7 day
+          const timeOfTodayWeek = new Date(
+            covertDDMMYYYYtoMMDDYYYY(
+              todayTrackedWeek.toLocaleDateString("pt-PT")
+            )
+          ).getTime();
+          const timeOfYesterdayWeek = new Date(
+            covertDDMMYYYYtoMMDDYYYY(
+              yesterdayTrackedWeek.toLocaleDateString("pt-PT")
+            )
+          ).getTime();
+          // display current streaked
+          if (
+            datesWeek[datesWeek.length - 1] == timeOfTodayWeek ||
+            datesWeek[datesWeek.length - 1] == timeOfYesterdayWeek
+          ) {
+            currentTracked = lastCurrentTrackedWeek;
+          }
+        }
         break;
       default:
         // tracked today
@@ -284,19 +368,25 @@ for (let i = 0; i < editGoals.length; i++) {
           new Date().toLocaleDateString("pt-PT")
         ) {
           tracted += 1;
+          currentTracked = 1;
         }
     }
-    // tracked
+    // productivity
     const productivityEditTracked = document.getElementById(
       "modal-edit-productivity"
     );
     const percent = Math.round((goal.tracted.length * 100) / tracted);
-    console.log(goal.tracted.length, tracted, percent);
     if (percent) {
       productivityEditTracked.innerHTML = `${percent} %<p>Productivity</p>`;
     } else {
       productivityEditTracked.innerHTML = "--<p>Productivity</p>";
     }
+    // current treaked
+    const modalEditCurrentTracked = document.getElementById(
+      "modal-edit-current-treaked"
+    );
+    modalEditCurrentTracked.innerHTML = `${currentTracked} Days <p>Current Streak</p>`;
+    // tracted
     const modalEditTracked = document.getElementById("modal-edit-tracted");
     modalEditTracked.innerHTML = `${tracted} Days <p>Tracked</p>`;
     // display modal edit
