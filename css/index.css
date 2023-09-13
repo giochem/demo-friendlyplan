@@ -1,4 +1,5 @@
 /* setup default */
+@import url("https://fonts.googleapis.com/css2?family=Oxygen:wght@300&display=swap");
 * {
   margin: 0;
   border: 0;
@@ -11,7 +12,9 @@ a:active {
   text-decoration: none;
 }
 body {
-  font-family: "DINPro", "Helvetica Neue", sans-serif;
+  font-family: "Oxygen", sans-serif;
+  background-color: black;
+  color: white;
 }
 /* header */
 .header {
@@ -51,11 +54,10 @@ body {
   background-color: bisque;
   text-align: center;
   cursor: pointer;
+  color: black;
+  transition: transform 0.5s;
 }
 .get_started:hover {
   background-color: aqua;
+  transform: scale(1.2);
 }
-/* .content__chart {
-  width: 512px;
-  height: 512px;
-} */

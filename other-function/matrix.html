@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eisenhower Matrix</title>
+    <link
+      rel="stylesheet"
+      href="./matrix.css
+    "
+    />
+  </head>
+  <body>
+    <div class="wrap">
+      <!-- eis matrix  -->
+      <div class="matrix">
+        <div id="js-do-now" class="do_now js_works">do now</div>
+        <div id="js-schedule" class="schedule js_works">schedule</div>
+        <div id="js-delegate" class="delegate js_works">delegate</div>
+        <div id="js-delete" class="delete js_works">delete</div>
+      </div>
+
+      <!-- input user -->
+      <form class="inp">
+        <input id="js-title" type="text" placeholder="Tiêu đề" required />
+        <input id="js-describe" type="text" placeholder="Mô tả" />
+        <select id="js-priority">
+          <option value="Urgent & Important">Urgent & Important</option>
+          <option value="Important & Not Urgent">Important & Not Urgent</option>
+          <option value="Urgent & Not Important">Urgent & Not Important</option>
+          <option value="Not Urgent & Not Important">
+            Not Urgent & Not Important
+          </option>
+        </select>
+        <button class="btn" id="js-add-note">ADD</button>
+      </form>
+    </div>
+    <!-- modal -->
+    <div id="my-modal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <form action="">
+          <input
+            id="js-edit-title"
+            type="text"
+            placeholder="Tiêu đề"
+            required
+          />
+          <input id="js-edit-describe" type="text" placeholder="Mô tả" />
+          <select id="js-edit-priority">
+            <option value="Urgent & Important">Urgent & Important</option>
+            <option value="Important & Not Urgent">
+              Important & Not Urgent
+            </option>
+            <option value="Urgent & Not Important">
+              Urgent & Not Important
+            </option>
+            <option value="Not Urgent & Not Important">
+              Not Urgent & Not Important
+            </option>
+          </select>
+          <div id="js-save" class="save">Lưu</div>
+          <div id="js-modal-delete" class="delete_note">Xóa</div>
+        </form>
+      </div>
+    </div>
+    <script src="./matrix.js"></script>
+  </body>
+</html>

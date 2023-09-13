@@ -1,0 +1,46 @@
+/* setup default */
+@import url("https://fonts.googleapis.com/css2?family=Oxygen:wght@300&display=swap");
+* {
+  margin: 0;
+  border: 0;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+a:active {
+  text-decoration: none;
+}
+body {
+  font-family: "Oxygen", sans-serif;
+}
+.get_started {
+  margin: 20px auto;
+  text-align: center;
+}
+.btn {
+  margin: 80px auto;
+  width: 250px;
+  line-height: 60px;
+  text-align: center;
+  border-radius: 12px;
+  cursor: pointer;
+}
+.guest {
+  background-color: orange;
+  transition: transform 0.5s;
+}
+.guest:hover {
+  transform: scale(1.2);
+}
+.login_or_register {
+  background-color: antiquewhite;
+}
+.other_function {
+  background-color: gray;
+  transition: transform 0.5s;
+  width: 350px;
+}
+.other_function:hover {
+  transform: scale(1.2);
+}

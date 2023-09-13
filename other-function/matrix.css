@@ -1,0 +1,111 @@
+* {
+  margin: 0;
+  border: 0;
+}
+.wrap {
+  height: 100vh;
+}
+
+.matrix {
+  margin-top: 50px;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+.matrix div {
+  width: 300px;
+  height: 300px;
+  text-align: center;
+}
+.do_now {
+  background-color: rgb(180, 65, 65);
+}
+.schedule {
+  background-color: rgb(230, 230, 70);
+}
+.delegate {
+  background-color: aquamarine;
+}
+.delete {
+  background-color: rgb(187, 233, 233);
+}
+
+.inp {
+  margin-top: 50px;
+  text-align: center;
+}
+.btn:hover {
+  cursor: pointer;
+}
+
+/* wrap -> matrix -> note */
+.note {
+  max-height: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+.note span:hover {
+  cursor: pointer;
+}
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+.save {
+  margin-top: 50px;
+  width: 50px;
+  background-color: blueviolet;
+  border-radius: 10px;
+  text-align: center;
+}
+.save:hover {
+  cursor: pointer;
+  background-color: blue;
+}
+
+.delete_note {
+  margin-top: 10px;
+  width: 50px;
+  background-color: red;
+  border-radius: 10px;
+  text-align: center;
+}
+.delete_note:hover {
+  cursor: pointer;
+  background-color: rgb(180, 65, 65);
+}

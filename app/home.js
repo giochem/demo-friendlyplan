@@ -1,5 +1,3 @@
-// today
-
 // - new goal
 // - add goal (name, repeat: (every, week, once),
 // end date)
@@ -90,7 +88,7 @@ function loadGoals() {
     // open goals, hidden empty
     const display = document.getElementById("goals");
     //
-    display.innerHTML = `<p class="goals_today">Today 0/0</p> `;
+    display.innerHTML = `<p class="goals_today">Today</p> `;
     // radio
     let hasFinish = "";
     let notFinish = "";
@@ -198,6 +196,7 @@ for (let i = 0; i < editGoals.length; i++) {
     const repeat = document.getElementById("modal-edit-repeat");
     name.value = goal.name;
     repeat.innerHTML = goal.repeat;
+    // let currentStreak = 0;
     // productivity of goal
     let productivity = 0;
     // tracked
@@ -219,12 +218,33 @@ for (let i = 0; i < editGoals.length; i++) {
         //  count stack before today
         tracted += (today - start) / (24 * 60 * 60 * 1000); // covert to day
         // tracked today
+
         if (
           goal.tracted[goal.tracted.length - 1] ==
           new Date().toLocaleDateString("pt-PT")
         ) {
           tracted += 1;
         }
+        const tracted = goal.tracted;
+        // if (tracted.length >= 1) {
+        //   let todayStreak = new Date().toLocaleDateString("pt-PT");
+        //   let yesterdayStreak = new Date(
+        //     new Date().getTime() - 24 * 60 * 60 * 1000// 1 day
+        //   ).toLocaleDateString("pt-PT");
+        //   if (tracted[tracted.length - 1] == todayStreak) {
+        //     let beforeTracted = new Date(covertDDMMYYYYtoMMDDYYYY(yesterdayStreak).getTime() - 24 * 60 * 60 * 1000);
+        //     for (
+        //       let tracted_i = tracted.length - 2;
+        //       tracted_i >= 0;
+        //       tracted_i--
+        //     ) {
+        //       const check  = beforeTracted.
+        //       if(tracted[tracted_i] == )
+        //     }
+        //   }
+        //   if (tracted[tracted.length - 1] == yesterdayStreak) {
+        //   }
+        // }
         // longest streak
         // if (goal.tracted.length >= 1) {
         //   longestStreak = Math.max(1, longestStreak);
