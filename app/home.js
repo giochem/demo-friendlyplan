@@ -14,12 +14,29 @@ function uuidv4() {
     ).toString(16)
   );
 }
+// DD/MM/YYYY -> MM/DD/YYYY
+const covertDDMMYYYYtoMMDDYYYY = (ddmmyyyy) => {
+  const parts = ddmmyyyy.split("/");
+  // month is 0-based, that's why we need dataParts[1] - 1
+  return new Date(+parts[2], parts[1] - 1, +parts[0]);
+};
 // Get the button that opens the modal
 const modal = document.getElementById("modal");
 const addGoal = document.getElementById("add-goal");
 addGoal.addEventListener("click", () => {
   // display
   modal.style.display = "block";
+});
+// when user choose repeat: do it once
+// display oprtions input priority
+const chooseOnceInRepeat = document.getElementById("input__repeat");
+chooseOnceInRepeat.addEventListener("change", (e) => {
+  const inputPriority = document.getElementById("input-priority");
+  if (e.target.value == "once") {
+    inputPriority.style.display = "block";
+  } else {
+    inputPriority.style.display = "none";
+  }
 });
 // closes the modal
 const modalClose = document.getElementById("modal-close");
@@ -37,12 +54,18 @@ modalSave.onclick = () => {
     const goals = JSON.parse(localStorage.getItem("goals"));
     // DD/MM/YYYY
     const today = new Date().toLocaleDateString("pt-PT");
+    // add priority if is once
+    let priority = "";
+    if (repeat == "once") {
+      priority = document.getElementById("input-priority").value;
+    }
     goals.push({
       id: uuidv4(),
       name,
       repeat,
       start: today,
       active: true,
+      priority,
       tracted: [],
     });
 
@@ -79,7 +102,7 @@ const calendar = () => {
   }
 };
 calendar();
-// load goal
+
 function loadGoals() {
   let goals = JSON.parse(localStorage.getItem("goals"));
   // get goal is not delete
@@ -138,12 +161,45 @@ function loadGoals() {
     display.style.display = "block";
   }
 }
-
+// when click new goal -> repeat once -> important
+// tomorrow -> update goal once ->
+// not import and not un,not import and unr -> remove
+// rest -> today -> miss goal
+const updateGoals = () => {
+  let goals = JSON.parse(localStorage.getItem("goals"));
+  goals = goals.filter(
+    (goal) =>
+      goal.active == true &&
+      goal.repeat == "once" &&
+      covertDDMMYYYYtoMMDDYYYY(goal.start).getTime() <
+        covertDDMMYYYYtoMMDDYYYY(
+          new Date().toLocaleDateString("pt-PT")
+        ).getTime()
+  );
+  if (goals.length) {
+    const notify = document.getElementById("notify");
+    notify.innerHTML = `<h2>Notify</h2>`;
+    for (let goal_i = 0; goal_i < goals.length; goal_i++) {
+      const goal = goals[goal_i];
+      if (
+        goal.priority == "not import and not urgent" ||
+        goal.priority == "not import and urgent"
+      ) {
+        // display notify html
+        notify.innerHTML += `<p>Remove goal: ${goal.name} -- ${goal.start} -- ${goal.priority} </p>`;
+      } else {
+        notify.innerHTML += `<p>Update goal: ${goal.name} -- ${goal.start} -- ${goal.priority} </p>`;
+      }
+    }
+  }
+};
+// load goal
 function loadLocalStore() {
   if (!localStorage.getItem("goals")) {
     localStorage.setItem("goals", JSON.stringify([]));
   }
   loadGoals();
+  updateGoals();
   console.log(JSON.parse(localStorage.getItem("goals")));
 }
 loadLocalStore();
@@ -196,18 +252,21 @@ for (let i = 0; i < editGoals.length; i++) {
     const repeat = document.getElementById("modal-edit-repeat");
     name.value = goal.name;
     repeat.innerHTML = goal.repeat;
+    const inputPriority = document.getElementById("modal-edit-input-priority");
+    // goal has repeat : once
+    if (goal.repeat == "once") {
+      inputPriority.style.display = "block";
+      inputPriority.value = goal.priority;
+    } else {
+      inputPriority.style.display = "none";
+    }
     // current tracked
     let currentTracked = 0;
     // tracked
     let tracted = 0;
     // longest streak
     let longestStreak = 0;
-    // DD/MM/YYYY -> MM/DD/YYYY
-    const covertDDMMYYYYtoMMDDYYYY = (ddmmyyyy) => {
-      const parts = ddmmyyyy.split("/");
-      // month is 0-based, that's why we need dataParts[1] - 1
-      return new Date(+parts[2], parts[1] - 1, +parts[0]);
-    };
+
     switch (goal.repeat) {
       case "every day":
         const start = covertDDMMYYYYtoMMDDYYYY(goal.start);
@@ -306,8 +365,11 @@ for (let i = 0; i < editGoals.length; i++) {
           new Date().toLocaleDateString("pt-PT")
         );
         //  count stack before today
-        tracted += (todayWeek - startWeek) / (7 * 24 * 60 * 60 * 1000); // covert to week
+        tracted += Math.ceil(
+          (todayWeek - startWeek) / (7 * 24 * 60 * 60 * 1000)
+        ); // covert to week
         // tracked today
+
         if (
           goal.tracted[goal.tracted.length - 1] ==
           new Date().toLocaleDateString("pt-PT")
@@ -412,6 +474,13 @@ saveEditGoal.addEventListener("click", () => {
     for (let i = 0; i < goals.length; i++) {
       if (goals[i].id == id) {
         goals[i].name = name;
+        // repeat : once -> change priority
+        if (goals[i].repeat == "once") {
+          const priority = document.getElementById(
+            "modal-edit-input-priority"
+          ).value;
+          goals[i].priority = priority;
+        }
         break;
       }
     }
@@ -448,3 +517,4 @@ deleteNote.addEventListener("click", () => {
     location.reload();
   }
 });
+// autumatic calendar

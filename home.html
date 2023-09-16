@@ -4,9 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Bevan:ital@1&display=swap");
-    </style>
     <link rel="stylesheet" href="./css/home.css" />
   </head>
   <body>
@@ -38,6 +35,7 @@
             <p class="item__date">21</p>
           </div>
         </div>
+        <div class="notify" id="notify"></div>
         <div id="empty" class="empty">
           <h3>Add your first goal</h3>
         </div>
@@ -84,9 +82,17 @@
             required
           ></textarea>
           <select id="input__repeat">
-            <option value="every day" name="" id="">Repeat every day</option>
-            <option value="every week" name="" id="">Repeat every week</option>
-            <option value="once" name="" id="">Do it once</option>
+            <option value="every day">Repeat every day</option>
+            <option value="every week">Repeat every week</option>
+            <option value="once">Do it once</option>
+          </select>
+          <select class="input__priority" id="input-priority">
+            <option value="import and urgent">Import and urgent</option>
+            <option value="import and not urgent">Import and not urgent</option>
+            <option value="not import and urgent">Not import and urgent</option>
+            <option value="not import and not urgent">
+              Not import and not urgent
+            </option>
           </select>
           <div id="modal-save" class="modal__save">Save</div>
         </form>
@@ -105,6 +111,17 @@
             placeholder="Goal name"
             required
           ></textarea>
+          <select
+            class="modal_edit__input__priority"
+            id="modal-edit-input-priority"
+          >
+            <option value="import and urgent">Import and urgent</option>
+            <option value="import and not urgent">Import and not urgent</option>
+            <option value="not import and urgent">Not import and urgent</option>
+            <option value="not import and not urgent">
+              Not import and not urgent
+            </option>
+          </select>
           <div class="modal_edit__more_info">
             <p class="modal_edit__more_info__item" id="modal-edit-repeat"></p>
 

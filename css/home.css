@@ -143,7 +143,10 @@ body {
   width: 60%;
   border-radius: 20px;
 }
-
+/* modal -> priority */
+.input__priority {
+  display: none;
+}
 /* The Close Button */
 .modal_close {
   color: #aaaaaa;
@@ -201,7 +204,9 @@ body {
   font-size: 32px;
   font-weight: bold;
 }
-
+.modal_edit__input__priority {
+  display: none;
+}
 .modal_edit_close:hover,
 .modal_edit_close:focus {
   color: #000;
